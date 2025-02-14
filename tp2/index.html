@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test CORS - API Personnes</title>
+</head>
+<body>
+    <h1>Liste des personnes</h1>
+    <ul id="personnes-list"></ul>
+
+    <script>
+        fetch('http://localhost:3000/personnes')
+        .then(response => response.json())
+        .then(data => {
+            const list = document.getElementById('personnes-list');
+            data.data.forEach(personne => {
+                const li = document.createElement('li');
+                li.textContent = `${personne.id}: ${personne.nom} - ${personne.adresse}`;
+                list.appendChild(li);
+            });
+        })
+        .catch(error => console.error('Erreur :', error));
+    </script>
+</body>
+</html>
